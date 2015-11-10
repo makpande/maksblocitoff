@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item=Item.new
+    @item = Item.new
   end
 
   def show
@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.user_id = current_user.id 
+    @item.user_id = current_user.id
 
     if @item.save
       redirect_to items_path, notice: "Item successfully saved."
