@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
 
-  devise_for :users, controllers: {
-        sessions: 'user/sessions'
-      }
+
+
   root 'welcome#index'
-  get 'welcome/index'
+  authenticated :user do
+    root to: 'items#index', as: :authenticated_root
+  end
+  devise_for :users
+  resources :items 
+  resources :users, only: [:show]
+
 
   get 'welcome/about'
 
