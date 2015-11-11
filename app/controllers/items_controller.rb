@@ -1,3 +1,21 @@
 class ItemsController < ApplicationController
 
+  def create
+    @user = User.find(params[:user_id])
+    @item = current_user.items.create(item_params)
+  end
+
+  def destroy
+    @user = User.find(params[:user_id])
+    @item = Item.find(params[:id])
+    @item.destroy
+  end
+
+  respond_to :html, :js
+
+  private
+
+  def item_params
+    params.require(:item).permit(:name)
+  end
 end

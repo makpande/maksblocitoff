@@ -1,0 +1,10 @@
+<br/>
+<div id=<%="item-#{item.id}"%> class="item list-group-item">
+  <h4 class='list-group-item-heading'><%= item.name %></h4>
+  <p><%= time_left(item) %></p>
+  <div class='list-group-item-text'>
+   <medium>Click Completed if task is finished - <%= link_to 'Completed', user_item_path(@user.id, item.id), method: :delete, remote: true %>
+     </button>
+   </medium>
+ </div>
+</div>
