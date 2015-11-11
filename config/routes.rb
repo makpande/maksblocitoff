@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
 
-
-
-  root 'welcome#index'
   authenticated :user do
     root to: 'items#index', as: :authenticated_root
   end
   devise_for :users
-  resources :items 
+  resources :items
   resources :users, only: [:show]
-
+  unauthenticated :user do
+    root :to => "welcome#index", as: 'unauthenticated_root'
+  end
+  get 'items/:id/done', to: 'items#done', as: "item_done"
 
   get 'welcome/about'
 
