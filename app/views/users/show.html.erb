@@ -1,28 +1,25 @@
-<h2>User Profile</h2>
-<div class="row">
-	<div class="col-md-8">
-		<div class="nav nav-tabs">
-      <p>Name: <big class="text-primary"><%=current_user.name%></big></p>
-  		<p>Email Address: <big class="text-primary"><%=current_user.email%></big></p>
-  		<p>Member Since: <big class="text-primary"><%=current_user.created_at.to_date.to_formatted_s(:long_ordinal)%></big></p>
+<h3 class='title'><%= "#{@user.name || @user.email}'s list of Tasks."%></h3>
 
-  		<%= button_to "Edit Profile", edit_user_registration_path, method: :get, class: 'btn btn-info' %>
-  		</br>
+<div class='jumbotron'>
+  <div class='row'>
+    <div class='col-md-4 pull-left'>
+      <h4>Rules of Blocitoff</h4>
+      <ul>
+        <li>Create as many Todo Items you want</li>
+        <li>You can complete the item and mark completed!</li>
+        <li>You have 7 days before it gets listed as Unimportant!!</li>
+        <li>Item will be deleted automatically after 7 days.</li>
+      </ul>
     </div>
+  </div>
+</div>
 
-    <div class="nav nav-tabs">
-  		<h3>View My To Do List</h3>
-      <p>Number of To Do Items<big class="text-primary"> <%= @user.items.count %> </big></p>
-  		<p>Number of To Do Items Completed:<big class="text-primary"> x </big></p>
-  		<p>Number of Open To Do Items<big class="text-primary"> x</big></p>
-
-  		<%= button_to "View To Do List", items_path, method: :get, class: 'btn btn-success' %>
-  		</br>
+  <div class='row'>
+    <div id="items" class='items list-group col-md-8 pull-left'>
+      <%= render @items %>
     </div>
+  </div>
 
-		<h3>Cancel My Account</h3>
-		<p>We are sorry to see you go. Please consider carefully this cannot be undone.</p>
-		<%= button_to "Cancel Account", registration_path(:user), data: { confirm: "Are you sure you want to cancel your account?" }, method: :delete, class: 'btn btn-danger' %>
-
-	</div>
+<div class='col-md-6'>
+  <%= render partial: 'items/form', locals: {user: @user} %>
 </div>

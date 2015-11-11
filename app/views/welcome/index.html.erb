@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html>
-
-<h2 class="title text-center">Blocitoff: Todo list and delete old task</h2>
-<br />
-
-  <div class="jumbotron text-center">
-    <h3>Create and Destroy Todo list</h3>
-    <p>
-      <% if user_signed_in? %>
-        <strong><%= current_user.name %></strong>
-      <% else %>
-        <%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %> -
-        <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %>
-      <% end %>
-    </p>
-  </div>
-
-</html>
+<div class='jumbotron pull-left'>
+  <h2>Welcome to Blocitoff!</h2>
+  <h3>This Todo List App is to help you get things done.</h3>
+  <p><%= link_to "Sign in", new_user_session_path %> - <%= link_to "Sign up", new_user_registration_path, class: 'btn btn-primary btn-lg' %></p>
+</div>
+<div class='app-info pull-left col-md-4'>
+  <span class='glyphicon glyphicon-list pull-left' aris-hidden='true'></span><p>Sign up and add items to your list.</p>
+  <span class='glyphicon glyphicon-time pull-left' aris-hidden='true'></span><p>You've got 7 days to complete an item, so get moving.</p>
+</div>

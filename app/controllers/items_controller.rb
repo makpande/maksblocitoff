@@ -1,49 +1,21 @@
 class ItemsController < ApplicationController
-  def index
-    @items = current_user.items.all
-  end
-
-  def new
-    @item = Item.new
-  end
-
-  def show
-    @item = Item.find(params[:id])
-  end
-
-  def edit
-  end
-
-  def update
-    @item = Item.find(params[:id])
-    if @item.update_attributes(item_params)
-      redirect_to items_path, notice: "Item updated."
-    else
-      flash[:error] = "Error updating To Do item.  Please try again."
-      render :new
-    end
-  end
 
   def create
-    @item = Item.new(item_params)
-    @item.user_id = current_user.id
-
-    if @item.save
-      redirect_to items_path, notice: "Item successfully saved."
-    else
-      flash[:error] = "Error adding you To Do item.  Please try again."
-      render :new
-    end
+    @user = User.find(params[:user_id])
+    @item = current_user.items.create(item_params)
   end
 
-  def done
+  def destroy
+    @user = User.find(params[:user_id])
     @item = Item.find(params[:id])
-    @item.status_done
-    redirect_to items_path
+    @item.destroy
   end
 
+  respond_to :html, :js
+  
   private
+
   def item_params
-    params.require(:item).permit(:name, :user_id, :status, :expiration)
+    params.require(:item).permit(:name)
   end
 end

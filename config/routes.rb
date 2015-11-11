@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
 
-  authenticated :user do
-    root to: 'items#index', as: :authenticated_root
-  end
   devise_for :users
-  resources :items
-  resources :users, only: [:show]
-  unauthenticated :user do
-    root :to => "welcome#index", as: 'unauthenticated_root'
-  end
-  get 'items/:id/done', to: 'items#done', as: "item_done"
 
+  resources :users, only: [:show] do
+    resources :items, only: [:create, :destroy]
+  end
+
+  authenticated :user do
+    root to: 'users#show', as: :authenticated_root
+  end
+
+  root to: 'welcome#index'
   get 'welcome/about'
 
   # The priority is based upon order of creation: first created -> highest priority.

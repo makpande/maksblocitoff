@@ -1,22 +1,9 @@
-<%= form_for item do |f| %>
-  <% if item.errors.any? %>
-  <div class="alert alert-danger">
-    <h4>There are <%= pluralize(item.errors.count, "error") %>.</h4>
-    <ul>
-      <% item.errors.full_messages.each do | msg | %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
+<%= form_for [user, user.items.new ], remote: true do |f| %>
+  <div class='form-group'>
+    <%= f.label :Add_New_Todo_Item %>
+    <%= f.text_field :name, class: 'form-control', placeholder: 'Add a new item.' %>
   </div>
-  <% end %>
-
-  <%= form_group_tag(item.errors[:name]) do %>
-    <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control', placeholder: "Enter To Do Item" %>
-  <%end%>
-
-  <div class="form-group">
-    <%= f.submit "Save", class: 'btn btn-success' %>
+  <div class='form-group'>
+    <%= f.submit 'Save', class: 'btn btn-success blue' %>
   </div>
-
 <% end %>
