@@ -27,7 +27,8 @@ puts "#{User.count} users created"
 25.times do
   Item.create!(
     user: users.sample,
-    name: Faker::Lorem.sentence
+    name: Faker::Lorem.sentence,
+    created_at: Time.at((20.days.ago.to_f - DateTime.now.to_f)*rand + DateTime.now.to_f)
   )
 end
 items = Item.all
